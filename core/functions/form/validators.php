@@ -125,23 +125,7 @@ function validate_select(string $field_input, array &$field): bool
     return true;
 }
 
-/**
- * Check if provided email is in correct format
- *
- * @param string $field_value
- * @param array $field
- * @return bool
- */
-function validate_email(string $field_value, array &$field): bool
-{
-    if (!preg_match('/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/', $field_value)) {
-        $field['error'] = 'Invalid email format';
 
-        return false;
-    }
-
-    return true;
-}
 
 /**
  * Check if input is valid URL
@@ -160,3 +144,15 @@ function validate_url(string $field_value, array &$field): bool
 
     return true;
 }
+
+function validate_min_5(string $field_value, array &$field): bool
+{
+
+    if ($field_value < 5) {
+        $field['error'] = 'Įdėta per mažai pinigų';
+        return false;
+    }
+
+    return true;
+}
+

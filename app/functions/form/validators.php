@@ -15,7 +15,7 @@ use App\App;
  */
 function validate_user_unique(string $field_input, array &$field): bool
 {
-    if (App::$db->getRowWhere('users', ['email' => $field_input])) {
+    if (App::$db->getRowWhere('users', ['user_name' => $field_input])) {
         $field['error'] = 'User already exists';
 
         return false;
@@ -39,7 +39,7 @@ function validate_user_unique(string $field_input, array &$field): bool
 function validate_login(array $filtered_input, array &$form): bool
 {
     if (App::$db->getRowWhere('users', [
-        'email' => $filtered_input['email'],
+        'user_name' => $filtered_input['user_name'],
         'password' => $filtered_input['password']
     ])) {
         return true;

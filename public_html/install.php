@@ -8,5 +8,5 @@ require '../bootloader.php';
 
 App::$db = new FileDB(DB_FILE);
 App::$db->createTable('users');
-App::$db->insertRow('users', ['username' => 'test1', 'password' => 'test']);
-App::$db->createTable('items');
+App::$db->insertRow('users', ['user_name' => 'test1', 'password' => 'test', 'cash' => 0 ]);
+//App::$db->createTable('money');

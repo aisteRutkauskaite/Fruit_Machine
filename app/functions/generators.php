@@ -12,7 +12,8 @@ function nav(): array
     if (App::$session->getUser()) {
         return [
             'HOME' => '/index.php',
-            'ADD' => '/admin/add.php',
+            'BUY GEMS' => '/admin/buy.php',
+            'HISTORY' => '/admin/history.php',
             'LOGOUT' => '/logout.php',
         ];
     } else {

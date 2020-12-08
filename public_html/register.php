@@ -14,43 +14,42 @@ $form = [
         'method' => 'POST',
     ],
     'fields' => [
-        'email' => [
-            'label' => 'EMAIL',
+        'user_name' => [
+            'label' => 'Vartotojo vardas',
             'type' => 'text',
             'validators' => [
                 'validate_field_not_empty',
-                'validate_email',
                 'validate_user_unique',
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter email',
+                    'placeholder' => 'Įrašykite savo vartotojo vardą',
                     'class' => 'input-field',
                 ]
             ]
         ],
         'password' => [
-            'label' => 'PASSWORD',
-            'type' => 'text',
+            'label' => 'Slaptažodis',
+            'type' => 'password',
             'validators' => [
                 'validate_field_not_empty',
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter password',
+                    'placeholder' => 'Įveskite slaptažodį',
                     'class' => 'input-field',
                 ]
             ]
         ],
         'password_repeat' => [
-            'label' => 'PASSWORD REPEAT',
-            'type' => 'text',
+            'label' => 'Slaptažodžio pakartojimas',
+            'type' => 'password',
             'validators' => [
                 'validate_field_not_empty',
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Repeat password',
+                    'placeholder' => 'Pakartokite slaptažodį',
                     'class' => 'input-field',
                 ]
             ]
@@ -58,7 +57,7 @@ $form = [
     ],
     'buttons' => [
         'send' => [
-            'title' => 'REGISTER',
+            'title' => 'Registruokites',
             'type' => 'submit',
             'extra' => [
                 'attr' => [
@@ -82,7 +81,8 @@ if ($clean_inputs) {
     if ($success) {
         unset($clean_inputs['password_repeat']);
 
-        App::$db->insertRow('users', $clean_inputs);
+        App::$db->insertRow('users', $clean_inputs + ['cash' => 0] + ['activity' => '']);
+
 
         header('Location: login.php');
     } else {
@@ -101,9 +101,12 @@ if ($clean_inputs) {
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<?php include(ROOT . '/core/templates/nav.php'); ?>
+<header>
+    <?php include(ROOT . '/core/templates/nav.php'); ?>
+</header>
+
 <main>
-    <h2>REGISTRATION</h2>
+    <h2 class="tittle">REGISTRACIJA</h2>
     <?php require ROOT . '/core/templates/form.tpl.php'; ?>
     <p><?php if (isset($text)) print $text; ?></p>
 </main>

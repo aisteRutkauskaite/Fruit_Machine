@@ -14,29 +14,29 @@ $form = [
         'method' => 'POST',
     ],
     'fields' => [
-        'email' => [
-            'label' => 'EMAIL',
+        'user_name' => [
+            'label' => 'Vartotojo vardas',
             'type' => 'text',
             'validators' => [
                 'validate_field_not_empty',
-                'validate_email',
+
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Įvesk emailą',
+                    'placeholder' => 'Įvesk vartotojo vardą',
                     'class' => 'input-field',
                 ],
             ],
         ],
         'password' => [
-            'label' => 'PASSWORD',
-            'type' => 'text',
+            'label' => 'Slaptažodis',
+            'type' => 'password',
             'validators' => [
                 'validate_field_not_empty',
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Įvesk slaptažodį',
+                    'placeholder' => 'Įveskite slaptažodį',
                     'class' => 'input-field',
                 ],
             ],
@@ -44,7 +44,7 @@ $form = [
     ],
     'buttons' => [
         'send' => [
-            'title' => 'LOGIN',
+            'title' => 'Prisijunkti',
             'type' => 'submit',
             'extra' => [
                 'attr' => [
@@ -67,10 +67,10 @@ if ($clean_inputs) {
     $form_success = validate_form($form, $clean_inputs);
 
     if ($form_success) {
-        App::$session->login($clean_inputs['email'], $clean_inputs['password']);
+        App::$session->login($clean_inputs['user_name'], $clean_inputs['password']);
 
         $text = 'Login successful';
-        header('Location: admin/add.php');
+        header('Location: admin/buy.php');
     }
 }
 
@@ -86,9 +86,12 @@ if ($clean_inputs) {
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<?php include(ROOT . '/core/templates/nav.php'); ?>
+<header>
+    <?php include(ROOT . '/core/templates/nav.php'); ?>
+</header>
+
 <main>
-    <h2>Login</h2>
+    <h2 class="tittle">Prisijunkite</h2>
     <?php require ROOT . '/core/templates/form.tpl.php'; ?>
     <p><?php if (isset($text)) print $text; ?></p>
 </main>
